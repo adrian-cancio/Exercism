@@ -17,23 +17,19 @@ Function Invoke-RnaTranscription() {
         [string]$Strand
     )
     
-    
-    [char[]]$RNAStrand = $Strand.ToCharArray()
+    $RNAStrand = ""
 
-    [hashtable]$Transcriptions = @{
+    $Transcriptions = @{
         'G'='C'
         'C'='G'
         'T'='A'
         'A'='U'
     }
-    
-    if ($RNAStrand.Length -eq 0) {
-        return ""
+
+    foreach ($Nucleotide in $Strand.ToCharArray()){
+        $RNAStrand += $Transcriptions["$Nucleotide"]
     }
 
-    foreach ($i in 0..($RNAStrand.Length - 1)) {
-        $RNAStrand[$i] = $Transcriptions[([string]$RNAStrand[$i]).ToUpper()]
-    }
+    return $RNAStrand
 
-    return -join $RNAStrand
 }

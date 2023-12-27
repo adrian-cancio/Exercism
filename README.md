@@ -4,14 +4,14 @@ Welcome to my [Exercism](https://exercism.org/) solutions repository! This is wh
 
 ## Programming Languages
 
-- PowerShell: Discover my latest adventures in learning PowerShell, focusing on scripting and automation.
-- Kotlin: Check out my solutions in Kotlin, showcasing my skills in this modern, statically-typed language.
+- **PowerShell**: Discover my latest adventures in learning PowerShell, focusing on scripting and automation.
+- **Kotlin**: Check out my solutions in Kotlin, showcasing my skills in this modern, statically-typed language.
 
 ## About This Repository
 
 - Each directory is named after a programming language.
 - Inside each language directory, you'll find sub-directories for each exercise.
-- Every exercise includes my solution file and a README with my thoughts and learnings.
+- Every exercise includes my solution file and a README with the statements of the exercises.
 
 ## Collaboration
 

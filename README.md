@@ -1,6 +1,6 @@
-# Exercism Solutions by Adrián Cancio Vázquez
+# Exercism Solutions by [adrian-cancio](https://github.com/adrian-cancio)
 
-Welcome to my Exercism solutions repository! This is where I share my journey in solving various programming challenges from Exercism. Dive into my code and explore my solutions across different languages.
+Welcome to my [Exercism](https://exercism.org/) solutions repository! This is where I share my journey in solving various programming challenges from Exercism. Dive into my code and explore my solutions across different languages.
 
 ## Programming Languages
 

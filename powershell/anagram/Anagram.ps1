@@ -1,3 +1,18 @@
+function Get-LettersCount {
+        [CmdletBinding()]
+        param (
+            [String]$Word  
+        )
+
+        $LettersCount = @{}
+
+        foreach ($Letter in $Word.ToCharArray()){
+            $LettersCount["$Letter".ToUpper()]++
+        }
+        return $LettersCount
+}
+
+
 Function Invoke-Anagram() {
     <#
     .SYNOPSIS
@@ -22,22 +37,18 @@ Function Invoke-Anagram() {
         [string[]]$Candidates
     )
 
-    [hashtable]$LettersCount = @{}
-
-    foreach ($Letter in $Subject.ToCharArray()){
-        $LettersCount[$Letter]++
-    }
-
+    $LettersCountSubject = Get-LettersCount -Word $Subject
     $Anagrams = @()
-
+    
     foreach ($Candidate in $Candidates){
-        [hashtable]$LettersCountInCandidate = @{}
-        foreach ($Letter in $Candidate.ToCharArray()){
-            $LettersCountInCandidate[$Letter]++
+        $LettersCountCandidate = Get-LettersCount -Word $Candidate
+        if ($Subject.ToUpper().GetHashCode() -eq $Candidate.ToUpper().GetHashCode() -or
+            $LettersCountSubject.Count -ne $LettersCountCandidate.Count){
+            continue
         }
         $IsAnagram = $true
-        foreach ($Letter in $LettersCount.Keys){
-            if ($LettersCountInCandidate[$Letter] -ne $LettersCount[$Letter]){
+        foreach ($key in $LettersCountSubject.keys){
+            if ($LettersCountSubject[$key] -ne $LettersCountCandidate[$key]){
                 $IsAnagram = $false
                 break
             }
@@ -49,5 +60,3 @@ Function Invoke-Anagram() {
 
     return $Anagrams
 }
-
-Write-Host $(Invoke-Anagram -Subject "allergy" -Candidates @("gallery", "ballerina", "regally", "clergy", "largely", "leading"))

@@ -25,5 +25,9 @@ Function Get-TwoFer(){
         [string]$Name
     )
 
-    Throw "Please implement this function"
+    if ($Name.Length -eq 0){
+        $Name = "you"
+    }
+
+    Return "One for $Name, one for me"
 }

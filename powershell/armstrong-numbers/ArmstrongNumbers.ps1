@@ -17,5 +17,18 @@ Function Invoke-ArmstrongNumbers() {
         [Int64]$Number
     )
 
-    Throw "Please implement this function"
+    if ($Number -eq 0){
+        return $true
+    }
+
+    [int]$Digits = [Math]::Ceiling([Math]::Log10($Number))
+    $Ref = $Number
+    $Sum = 0
+
+    while ($Ref -gt 0) {
+        $Sum += [int][Math]::Pow($Ref%10,$Digits)
+        $Ref = [Math]::Floor($Ref/10)
+    }
+
+    return ($Number -eq $Sum)
 }

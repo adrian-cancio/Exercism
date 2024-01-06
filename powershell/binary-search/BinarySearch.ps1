@@ -21,5 +21,32 @@ Function Invoke-BinarySearch() {
         [Int64]$Value
     )
 
-    throw "Please implement this function"
+    [int]$MinIndex = 0
+    [int]$MaxIndex = $Array.Length-1
+    [int]$MiddleIndex = ($MaxIndex+$MinIndex)/2
+
+
+    while ($MiddleIndex -lt $MaxIndex){
+        $MiddleValue = $Array[$MiddleIndex]
+        if ($Value -eq $MiddleValue){
+            return $MiddleIndex
+        }
+        elseif ($Value -lt $MiddleValue){
+            $MaxIndex = $MiddleIndex
+        }
+        elseif ($Value -gt $MiddleValue){
+            $MinIndex = $MiddleIndex
+        }
+        $MiddleIndex = ($MaxIndex+$MinIndex)/2
+    }
+
+    if ($Array[$MinIndex] -eq $Value){
+        return $MinIndex
+    }
+    elseif ($Array[$MaxIndex] -eq $Value){
+        return $MaxIndex
+    }
+
+    throw "error: value not in array"
+
 }

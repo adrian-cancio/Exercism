@@ -20,5 +20,14 @@ Function Invoke-Isogram() {
         [string]$Phrase
     )
 
-    Throw "Please implement this function"
+    $SortedArray = ($Phrase.ToLower().ToCharArray() | Sort-Object)
+
+    for ($i = 1; $i -lt $SortedArray.Length; $i++){
+        if ("a".."z" -contains $SortedArray[$i] -and
+        $SortedArray[$i-1] -eq $SortedArray[$i]){
+            return $false
+        }
+    }
+
+    return $true
 }

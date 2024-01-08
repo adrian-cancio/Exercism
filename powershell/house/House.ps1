@@ -26,42 +26,30 @@ Function Get-Rhyme() {
         [int]$End
     )
     
-    $Subjects = @(
-        "house",
-        "malt",
-        "rat",
-        "cat",
-        "dog",
-        "cow with the crumpled horn",
-        "maiden all forlorn",
-        "man all tattered and torn",
-        "priest all shaven and shorn",
-        "rooster that crowed in the morn",
-        "farmer sowing his corn",
-        "horse and the hound and the horn"
-    )
+    $SubjectActions = [Ordered]@{
+        "house" = "Jack built"
+        "malt" = "lay in"
+        "rat" = "ate"
+        "cat" = "killed"
+        "dog" = "worried"
+        "cow with the crumpled horn" = "tossed"
+        "maiden all forlorn" ="milked"
+        "man all tattered and torn" = "kissed"
+        "priest all shaven and shorn" = "married"
+        "rooster that crowed in the morn" = "woke"
+        "farmer sowing his corn" = "kept"
+        "horse and the hound and the horn" = "belonged to"
+    }
 
-    $Modifyers = @(
-        "Jack built",
-        "lay in",
-        "ate",
-        "killed",
-        "worried",
-        "tossed",
-        "milked"
-        "kissed",
-        "married",
-        "woke",
-        "kept",
-        "belonged to"
-    )
+    $Subjects = $SubjectActions.Keys
 
     $Sentences=@()
     
     for ($i = $Start-1; $i -lt $End; $i++){
         $Phrase = "This is the $($(
             for ($j = $i; $j -ge 0; $j--){
-                "$($Subjects[$j]) that $($Modifyers[$j])"
+                $Modyfier = $SubjectActions[$Subjects[$j]]
+                "$($Subjects[$j]) that $($Modyfier)"
             }) -join " the ")."
         $Sentences += $Phrase 
     }

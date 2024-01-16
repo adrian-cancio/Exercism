@@ -23,5 +23,27 @@ Function Get-Slices() {
         [int]$SliceLength
     )
 
+    if ($Series.Length -le 0) {
+        Throw "Series cannot be empty."
+    }
+    if ($SliceLength -gt $Series.Length){
+        Throw "Slice length cannot be greater than series length."
+    }
+    if ($SliceLength -eq 0) {
+        Throw "Slice length cannot be zero."
+    }
+    if ($SliceLength -lt 0) {
+        Throw "Slice length cannot be negative."
+    }
+
+    $SeriesArray=@()
+
+    for ($i = 0; $i -le $Series.Length-$SliceLength; $i++){
+        $SeriesArray += -join $Series[$i..($i+$SliceLength-1)]
+    }
+
+    return $SeriesArray
+
+
     Throw "Please implement this function"
 }

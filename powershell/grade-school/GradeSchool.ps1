@@ -26,13 +26,42 @@
 #>
 
 class Student {
-    Student() {
-        Throw "Please implement this class"
+    [Int16] $Grade
+    [String]$Name
+
+    Student([Int16]$Grade, [String]$Name) {
+        $this.Grade = $Grade
+        $this.Name = $Name
     }
 }
 
 class Roster {
+    
+    [Student[]]$Students
+    
     Roster() {
-        Throw "Please implement this class"
+        $this.Students
     }
+
+    [bool] AddStudent([Int16]$Grade, [String]$Name) {
+        if ($this.Students | Where-Object {$_.Name -eq $Name}){
+            return $false
+        }
+        $NewStudent = [Student]::new($Grade, $Name)
+        $this.Students += $NewStudent
+        return $true
+    }
+
+    [Student[]] GetRoster([Int16]$Grade) {
+        if ($null -ne $Grade) {
+            return $this.Students | Where-Object {$_.Grade -eq $Grade} | Sort-Object -Property Name
+        }
+        return $this.GetRoster()
+    }
+
+    [Student[]] GetRoster() {
+        return $this.Students | Sort-Object -Property Grade, Name
+    }
+    
+ 
 }

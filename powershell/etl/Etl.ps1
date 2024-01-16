@@ -17,5 +17,13 @@ Function Invoke-Etl() {
         [object]$Legacy
     )
 
-    Throw "Please implement this function"
+    $IndividualScores = @{}
+
+    foreach ($Points in $Legacy.keys){
+        foreach ($Letter in $Legacy.$Points){
+            $IndividualScores[$Letter.toLower()] = $Points
+        }
+    }
+
+    return $IndividualScores
 }

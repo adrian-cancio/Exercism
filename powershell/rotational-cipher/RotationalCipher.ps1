@@ -21,7 +21,6 @@ Function Invoke-RotationalCipher() {
         [int]$Shift
     )
 
-    [char]$CHAR_a = "a"
     [char]$CHAR_A = "A"
     $LETTERS_COUNT = 26
 

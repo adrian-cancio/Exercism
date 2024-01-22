@@ -1,3 +1,9 @@
+# Common Constants
+Set-Variable -Name Numbers -Value @([char]"0"..[char]"9") -Option Constant
+Set-Variable -Name Letters -Value @("a".."z") -Option Constant
+Set-Variable -Name GroupLength -Value 5 -Option Constant
+Set-Variable -Name GroupJoinChar -Value " " -Option Constant
+
 Function Invoke-Encode() {
     <#
     .SYNOPSIS
@@ -18,8 +24,27 @@ Function Invoke-Encode() {
     Param(
         [string]$Phrase
     )
-    
-    throw "Please implement this function"
+
+    $LowerPhrase = $Phrase.ToLower()
+    $EncodedPhraseNoSpaces = ""
+
+    foreach ($Char in $LowerPhrase.ToCharArray()){
+        if ($Char -in $Numbers){
+            $EncodedPhraseNoSpaces += $Char
+        }
+        elseif ($Char -in $Letters){
+            $LetterIndex = $Letters.IndexOf($Char)
+            $EncodedPhraseNoSpaces += $Letters[$Letters.Length-$LetterIndex-1]
+        }
+    }
+
+    return $(for ($i = 0; $i -lt $EncodedPhraseNoSpaces.Length; $i+=$GroupLength){
+        $EncodedPhraseNoSpaces.Substring($i,
+        [Math]::Min($GroupLength,$EncodedPhraseNoSpaces.Length-$i))
+    }) -join $GroupJoinChar
+
+
+
 }
 
 Function Invoke-Decode(){
@@ -43,5 +68,16 @@ Function Invoke-Decode(){
         [string]$Phrase
     )
 
-    throw "Please implement this function"
+    $PhraseJoined = $Phrase.Replace($GroupJoinChar,"")
+
+    return -Join $(foreach ($Char in $PhraseJoined.ToCharArray()){
+        if ($Char -in $Numbers){
+            $Char
+        }
+        elseif ($Char -in $Letters){
+            $LetterIndex = $Letters.IndexOf($Char)
+            $Letters[$Letters.Length-$LetterIndex-1]
+        }
+    })
+
 }

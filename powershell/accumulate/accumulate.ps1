@@ -33,5 +33,6 @@ Function Get-Accumulation() {
         [scriptblock]$Func
     )
 
-    Throw "Please implement this function"
+    return $(foreach ($Input in $List){ & $Func $Input })
+    
 }

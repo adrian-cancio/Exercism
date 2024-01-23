@@ -20,11 +20,60 @@
 
 #>
 Class Character {
+
+    [int]$HitPoints
+
+    # Abilities
+    [int]$Dexterity
+    [int]$Constitution
+    [int]$Intelligence
+    [int]$Wisdom
+    [int]$Charisma
+    [int]$Strength
+
     Character() {
-        Throw "Please implement this class"
+        $this.Dexterity = $this.Ability()
+        $this.Constitution = $this.Ability()
+        $this.Intelligence = $this.Ability()
+        $this.Wisdom = $this.Ability()
+        $this.Charisma = $this.Ability()
+        $this.Strength = $this.Ability()
+
+        $this.HitPoints = 10 + [Character]::GetModifier($this.Constitution)
     }
 
     static [int] GetModifier([int]$Score) {
-        Throw "Please implement this function"
+        return [math]::Floor(($Score - 10) / 2)
+    }
+
+    [int] Ability(){
+        # Throw dices
+        $Results = Get-Random -Minimum 1 -Maximum 6 -Count 4
+
+        # Get value of minimum dice thrown
+        $MinValue = $Results |
+            Measure-Object -Minimum |
+            Select-Object -ExpandProperty Minimum
+
+        # Delete value of minimum dice thrown
+        $DeletedMinimum =$false
+        $Best3Results = $Results | 
+            ForEach-Object {
+                if (!$DeletedMinimum -and $_ -eq $MinValue){
+                    $DeletedMinimum = $true
+                }
+                else { $_ }
+            }
+
+        # Return sum of 3 best results
+        return ($Best3Results | Measure-Object -Sum).Sum
+
+        # This method could be done by simply making:
+        # return Get-Random -Minimum 3 -Maximum 18
+        # But i've done this to 'emulate' dice throws
+
     }
 }
+
+
+[Character]::GetModifier(5)

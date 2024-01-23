@@ -5,7 +5,6 @@ Welcome to my [Exercism](https://exercism.org/) solutions repository! This is wh
 ## Programming Languages
 
 - **PowerShell**: Discover my latest adventures in learning PowerShell, focusing on scripting and automation.
-- **Kotlin**: Check out my solutions in Kotlin, showcasing my skills in this modern, statically-typed language.
 
 ## About This Repository
 

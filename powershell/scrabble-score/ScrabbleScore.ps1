@@ -31,5 +31,32 @@ Function Get-ScrabbleScore() {
         [string]$Word,
         [switch]$Bonus
     )
-    Throw "Please implement this function"
+
+    $RawValues = @{
+        "A, E, I, O, U, L, N, R, S, T"  = 1
+        "D, G"                          = 2
+        "B, C, M, P"                    = 3
+        "F, H, V, W, Y"                 = 4
+        "K"                             = 5
+        "J, X"                          = 8
+        "Q, Z"                          = 10
+    }
+
+    $Values = @{}
+
+    foreach ($Key in $RawValues.Keys){
+        $Letters = $Key.split(", ")
+        foreach ($Letter in $Letters){
+            $Values.$Letter = $RawValues.$Key
+        }
+    }
+
+    return `
+        $(if($Bonus){2}else{1}) * (
+            $Word.ToCharArray()
+                | ForEach-Object { $Values.([string]$_) }
+                | Measure-Object -Sum
+                | Select-Object -ExpandProperty Sum
+        )
 }
+

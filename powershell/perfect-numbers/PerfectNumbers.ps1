@@ -19,5 +19,21 @@ Function Invoke-PerfectNumbers() {
         [Int64]$Number
     )
 
-    Throw "Please implement this function"
+    if ($Number -le 0){
+        Throw "error: Classification is only possible for positive integers."
+    }
+
+    $Factors = for ($i = 1; $i -lt $Number; $i++){
+        if ($Number % $i -eq 0){ $i }
+    }
+
+    $Sum = $Factors |
+        Measure-Object -Sum |
+        Select-Object -ExpandProperty Sum
+
+    switch ($Sum) {
+        {$_ -lt $Number} { return "deficient" }
+        {$_ -gt $Number} { return "abundant" }
+        Default { return "perfect" }
+    }
 }

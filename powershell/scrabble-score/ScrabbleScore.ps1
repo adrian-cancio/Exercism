@@ -47,14 +47,14 @@ Function Get-ScrabbleScore() {
     foreach ($Key in $RawValues.Keys){
         $Letters = $Key.split(", ")
         foreach ($Letter in $Letters){
-            $Values.$Letter = $RawValues.$Key
+            $Values.([char]$Letter) = $RawValues.$Key
         }
     }
 
     return `
         $(if($Bonus){2}else{1}) * (
-            $Word.ToCharArray()
-                | ForEach-Object { $Values.([string]$_) }
+            $Word.toUpper().ToCharArray()
+                | ForEach-Object { $Values.($_) }
                 | Measure-Object -Sum
                 | Select-Object -ExpandProperty Sum
         )

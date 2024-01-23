@@ -17,7 +17,11 @@ Function Get-SquareOfSum() {
         [Int64]$Number
     )
 
-    throw "Please implement this function"
+    [Int64]$Sum = 0
+
+    @(1..$Number) | ForEach-Object { $Sum += $_ }
+    
+    return [Math]::Pow($Sum, 2)
 }
 
 Function Get-SumOfSquares() {
@@ -39,7 +43,12 @@ Function Get-SumOfSquares() {
         [Int64]$Number
     )
 
-    throw "Please implement this function"
+    [Int64]$Sum = 0
+
+    @(1..$Number) | ForEach-Object { $Sum += [Math]::Pow($_, 2) }
+
+    return $Sum
+    
 }
 
 Function Get-DifferenceOfSquares() {
@@ -61,5 +70,5 @@ Function Get-DifferenceOfSquares() {
         [Int64]$Number
     )
 
-    throw "Please implement this function"
+    return $(Get-SquareOfSum $Number) - $(Get-SumOfSquares $Number)
 }

@@ -17,5 +17,12 @@ Function Get-Acronym() {
     Param (
         [string]$Phrase
     )
-    Throw "Please implement this function"
+
+    $Words = $Phrase.Split().Split("-").Split("_")
+
+    return -join $( $Words |
+            ForEach-Object { 
+                ([string]$_[0]).ToUpper()
+            }
+    )
 }

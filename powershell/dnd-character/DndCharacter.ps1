@@ -67,10 +67,5 @@ Class Character {
 
         # Return sum of 3 best results
         return ($Best3Results | Measure-Object -Sum).Sum
-
-        # This method could be done by simply making:
-        # return Get-Random -Minimum 3 -Maximum 18
-        # But i've done this to 'emulate' dice throws
-
     }
 }

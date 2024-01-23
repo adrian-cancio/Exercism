@@ -17,7 +17,17 @@ Function Get-GrainSquare() {
         [BigInt]$Number
     )
 
-    throw "Please implement this function"
+    if ($Number -lt 1 -or $Number -gt 64){
+        Throw "square must be between 1 and 64"
+    }
+
+    [bigint]$Grains = 1
+
+    for ($i = 1; $i -lt $Number; $i++){
+        $Grains *= 2
+    }
+
+    return $Grains
 }
 
 Function Get-GrainTotal() {
@@ -32,5 +42,11 @@ Function Get-GrainTotal() {
     Get-GrainTotal
     #>
     
-    throw "Please implement this function"
+    [bigint]$GrainTotal = 0
+
+    for ($i = 1; $i -le 64; $i++){
+        $GrainTotal += Get-GrainSquare $i
+    }
+
+    return $GrainTotal
 }

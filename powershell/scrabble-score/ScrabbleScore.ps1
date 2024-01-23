@@ -47,7 +47,7 @@ Function Get-ScrabbleScore() {
     foreach ($Key in $RawValues.Keys){
         $Letters = $Key.split(", ")
         foreach ($Letter in $Letters){
-            $Values.([char]$Letter) = $RawValues.$Key
+            $Values[[char]$Letter] = $RawValues.$Key
         }
     }
 

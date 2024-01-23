@@ -74,6 +74,3 @@ Class Character {
 
     }
 }
-
-
-[Character]::GetModifier(5)
